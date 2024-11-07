@@ -19,5 +19,6 @@
 
         public Language Language { get; set; }
 
+        public ICollection<BookPrice> BookPrices { get; set; }
     }
 }

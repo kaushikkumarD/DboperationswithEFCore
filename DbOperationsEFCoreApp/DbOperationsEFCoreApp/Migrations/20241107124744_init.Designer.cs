@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbOperationsEFCoreApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241107121139_AddLanguageTable")]
-    partial class AddLanguageTable
+    [Migration("20241107124744_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,53 @@ namespace DbOperationsEFCoreApp.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("DbOperationsEFCoreApp.Data.BookPrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.ToTable("BookPrices");
+                });
+
+            modelBuilder.Entity("DbOperationsEFCoreApp.Data.Currency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CurrencyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currencies");
+                });
+
             modelBuilder.Entity("DbOperationsEFCoreApp.Data.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -78,7 +125,7 @@ namespace DbOperationsEFCoreApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Language");
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("DbOperationsEFCoreApp.Data.Book", b =>
@@ -90,6 +137,35 @@ namespace DbOperationsEFCoreApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("DbOperationsEFCoreApp.Data.BookPrice", b =>
+                {
+                    b.HasOne("DbOperationsEFCoreApp.Data.Book", "Book")
+                        .WithMany("BookPrices")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DbOperationsEFCoreApp.Data.Currency", "Currency")
+                        .WithMany("bookPrices")
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Currency");
+                });
+
+            modelBuilder.Entity("DbOperationsEFCoreApp.Data.Book", b =>
+                {
+                    b.Navigation("BookPrices");
+                });
+
+            modelBuilder.Entity("DbOperationsEFCoreApp.Data.Currency", b =>
+                {
+                    b.Navigation("bookPrices");
                 });
 
             modelBuilder.Entity("DbOperationsEFCoreApp.Data.Language", b =>
