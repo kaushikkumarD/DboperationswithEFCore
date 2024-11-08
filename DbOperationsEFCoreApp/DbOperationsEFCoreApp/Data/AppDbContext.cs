@@ -4,10 +4,13 @@ namespace DbOperationsEFCoreApp.Data
 {
     public class AppDbContext :DbContext
     {
+        //Construction
         public AppDbContext(DbContextOptions<AppDbContext>options) : base(options)
         {
-            
         }
+
+        //Override ModelBuilder to Insert Records into specific Tables
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Language>().HasData(
@@ -18,10 +21,12 @@ namespace DbOperationsEFCoreApp.Data
                 );
             modelBuilder.Entity<Currency>().HasData(
                     new Currency() { Id = 1,CurrencyName="INR",Description="Indian INR"},
-                    new Currency() { Id = 2,CurrencyName="GBP",Description="UK GBP"},
-                    new Currency() { Id = 3,CurrencyName="USD",Description="USA Dollor"}
+                    new Currency() { Id = 2,CurrencyName="Pound",Description="GBP"},
+                    new Currency() { Id = 3,CurrencyName="Dollar",Description="USA Dollar"},
+                    new Currency() { Id = 4, CurrencyName = "Euro", Description = "Euro" }
                 );
         }
+        //Let know EF about tables to create
         public DbSet<Book> Books{ get; set; }
         public DbSet<BookPrice> BookPrices{ get; set; }
         public DbSet<Language> Languages{ get; set; }

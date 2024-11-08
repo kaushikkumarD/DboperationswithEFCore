@@ -14,11 +14,13 @@
         
         public DateTime CreatedOn{ get; set; }
 
-        public int LanguageId { get; set; }
+        public int LanguageId { get; set; } 
 
-
+        // Map and Defined Foreign key Column - Table Name
         public Language Language { get; set; }
 
+
+        // Map and Defined Table name where Book table id Col will be foreign key
         public ICollection<BookPrice> BookPrices { get; set; }
     }
 }
