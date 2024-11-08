@@ -7,7 +7,7 @@ namespace DbOperationsEFCoreApp.Controllers
     [Route("api/Language")]
     [ApiController]
 
-    public class LanguageController : Controller
+    public class LanguageController : Controller 
     {
         private readonly AppDbContext _appDbContext;
 

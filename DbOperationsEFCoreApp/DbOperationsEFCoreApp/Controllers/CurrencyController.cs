@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DbOperationsEFCoreApp.Controllers
 {
     [Route("api/Currency")]
-    [ApiController]
+    [ApiController] 
 
     public class CurrencyController : Controller
     {

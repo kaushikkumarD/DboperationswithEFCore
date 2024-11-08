@@ -14,7 +14,7 @@ namespace DbOperationsEFCoreApp.Migrations
                 table: "Currencies",
                 keyColumn: "Id",
                 keyValue: 2,
-                columns: new[] { "CurrencyName", "Description" },
+                columns: new[] { "CurrencyName", "Description" }, 
                 values: new object[] { "Pound", "GBP" });
 
             migrationBuilder.UpdateData(
