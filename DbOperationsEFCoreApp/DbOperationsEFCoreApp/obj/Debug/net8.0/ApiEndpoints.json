@@ -8,6 +8,7 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+<<<<<<< HEAD
   },
   {
     "ContainingType": "DbOperationsEFCoreApp.Controllers.LanguageController",
@@ -18,5 +19,7 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+=======
+>>>>>>> 7eb291bf87849e4569c3cc94cfa745120882d663
   }
 ]
