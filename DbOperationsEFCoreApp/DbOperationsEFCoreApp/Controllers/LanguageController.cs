@@ -16,7 +16,7 @@ namespace DbOperationsEFCoreApp.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpGet]
+        [HttpGet] 
         public async Task <IActionResult> GetAll()
         {
             var result = await _appDbContext.Languages.ToListAsync();
